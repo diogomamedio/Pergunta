@@ -28,6 +28,11 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: all 0.3s ease; /* Adiciona transição para suavizar o movimento */
+        }
+
+        .btn:hover {
+            transform: scale(1.1); /* Aumenta o tamanho do botão ao passar o mouse */
         }
 
         .btn-success {
@@ -68,10 +73,16 @@
 
         let posicaoX = 0;
         let posicaoY = 0;
+        let maximoX = window.innerWidth - botaoNao.offsetWidth; /* Largura máxima da tela menos a largura do botão */
+        let maximoY = window.innerHeight - botaoNao.offsetHeight; /* Altura máxima da tela menos a altura do botão */
 
         botaoNao.addEventListener('click', () => {
-            posicaoX += Math.random() * 50 - 25;
-            posicaoY += Math.random() * 50 - 25;
+            posicaoX += Math.random() * 20 - 10; /* Movimento suave com valor aleatório entre -10 e 10 */
+            posicaoY += Math.random() * 20 - 10;
+
+            // Limita a posição do botão dentro da tela
+            posicaoX = Math.max(0, Math.min(posicaoX, maximoX));
+            posicaoY = Math.max(0, Math.min(posicaoY, maximoY));
 
             botaoNao.style.left = posicaoX + 'px';
             botaoNao.style.top = posicaoY + 'px';
