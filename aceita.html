@@ -3,95 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aceita Ir?</title>
+    <title>Aceita ir?</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
+        #mensagem-sim {
+            display: none; /* Mensagem escondida inicialmente */
         }
 
-        .container {
-            margin: 0 auto;
-            width: 500px;
-            padding: 20px;
-            border: 1px solid #ccc;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease; /* Adiciona transição para suavizar o movimento */
-        }
-
-        .btn:hover {
-            transform: scale(1.1); /* Aumenta o tamanho do botão ao passar o mouse */
-        }
-
-        .btn-success {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .btn-danger {
-            background-color: #F44336;
-            color: white;
-        }
-
-        #mensagem {
-            margin-top: 20px;
-            font-size: 18px;
-            color: green;
-        }
-
-        #mensagem.erro {
-            color: red;
+        #botao-nao {
+            position: absolute; /* Posicionamento absoluto para mover livremente */
+            top: 50%; /* Inicia no centro vertical */
+            left: 50%; /* Inicia no centro horizontal */
+            transform: translate(-50%, -50%); /* Compensa a posição original */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Aceita Ir?</h1>
-        <div class="buttons">
-            <button id="sim" class="btn btn-success">Sim</button>
-            <button id="nao" class="btn btn-danger">Não</button>
+    <div class="container mt-5">
+        <h1>Aceita ir?</h1>
+
+        <div class="row mt-3">
+            <div class="col-6">
+                <button id="botao-sim" class="btn btn-success btn-lg">Sim</button>
+            </div>
+            <div class="col-6">
+                <button id="botao-nao" class="btn btn-danger btn-lg">Não</button>
+            </div>
         </div>
-        <div id="mensagem" class="mensagem"></div>
+
+        <div id="mensagem-sim" class="alert alert-success mt-3">
+            <p>Combinado! Seu compromisso foi agendado para o próximo fim de semana!</p>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
-        const botaoSim = document.getElementById('sim');
-        const botaoNao = document.getElementById('nao');
-        const mensagem = document.getElementById('mensagem');
+        // Capturando elementos
+        const botaoSim = document.getElementById('botao-sim');
+        const botaoNao = document.getElementById('botao-nao');
+        const mensagemSim = document.getElementById('mensagem-sim');
 
-        let posicaoX = 0;
-        let posicaoY = 0;
-        let maximoX = window.innerWidth - botaoNao.offsetWidth; /* Largura máxima da tela menos a largura do botão */
-        let maximoY = window.innerHeight - botaoNao.offsetHeight; /* Altura máxima da tela menos a altura do botão */
-
-        botaoNao.addEventListener('click', () => {
-            posicaoX += Math.random() * 20 - 10; /* Movimento suave com valor aleatório entre -10 e 10 */
-            posicaoY += Math.random() * 20 - 10;
-
-            // Limita a posição do botão dentro da tela
-            posicaoX = Math.max(0, Math.min(posicaoX, maximoX));
-            posicaoY = Math.max(0, Math.min(posicaoY, maximoY));
+        // Função para mover o botão "Não"
+        function moverBotaoNao() {
+            const posicaoX = Math.floor(Math.random() * (window.innerWidth - 200));
+            const posicaoY = Math.floor(Math.random() * (window.innerHeight - 100));
 
             botaoNao.style.left = posicaoX + 'px';
             botaoNao.style.top = posicaoY + 'px';
+        }
+
+        // Evento de clique no botão "Sim"
+        botaoSim.addEventListener('click', () => {
+            mensagemSim.style.display = 'block'; // Exibe a mensagem
         });
 
-        botaoSim.addEventListener('click', () => {
-            mensagem.textContent = 'Combinado! Seu compromisso foi agendado para o próximo fim de semana!';
-            botaoNao.style.display = 'none';
-        });
+        // Evento de clique no botão "Não"
+        botaoNao.addEventListener('click', moverBotaoNao);
     </script>
 </body>
 </html>
