@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aceita Ir?</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            margin: 0 auto;
+            width: 500px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: #F44336;
+            color: white;
+        }
+
+        #mensagem {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+
+        #mensagem.erro {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Aceita Ir?</h1>
+        <div class="buttons">
+            <button id="sim" class="btn btn-success">Sim</button>
+            <button id="nao" class="btn btn-danger">Não</button>
+        </div>
+        <div id="mensagem" class="mensagem"></div>
+    </div>
+
+    <script>
+        const botaoSim = document.getElementById('sim');
+        const botaoNao = document.getElementById('nao');
+        const mensagem = document.getElementById('mensagem');
+
+        let posicaoX = 0;
+        let posicaoY = 0;
+
+        botaoNao.addEventListener('click', () => {
+            posicaoX += Math.random() * 50 - 25;
+            posicaoY += Math.random() * 50 - 25;
+
+            botaoNao.style.left = posicaoX + 'px';
+            botaoNao.style.top = posicaoY + 'px';
+        });
+
+        botaoSim.addEventListener('click', () => {
+            mensagem.textContent = 'Combinado! Seu compromisso foi agendado para o próximo fim de semana!';
+            botaoNao.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
